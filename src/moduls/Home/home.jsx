@@ -19,14 +19,16 @@ const Home = () => {
       const res = await fetch("https://jsonplaceholder.typicode.com/todos")
         .then((res) => res.json())
         .catch((err) => console.log({ err }));
-
-      const res2 = res?.map(({ title, completed }) => ({
-        task: title,
-        priority: "Low",
-        progress: completed ? "Done" : "To_Do",
-      }));
+      // let res2 = new Array(4);
+      let res2 = res
+        ?.map(({ title, completed }) => ({
+          task: title,
+          priority: "Low",
+          progress: completed ? "Done" : "To_Do",
+        }))
+        ?.slice(0, 10);
       setData([...data, ...res2]);
-      console.log("api", data);
+      console.log("api", res2);
     };
 
     fetchData();
