@@ -21,14 +21,14 @@ const ListItem = ({ item, index, handleAction }) => {
           <Badge bg="secondary">{progress?.split("_")?.join(" ")}</Badge>
         </FlexDiv>
       </Col>
-      <Col lg={2} md={2} sm={1} xs={3}>
+      <Col lg={2} md={2} sm={2} xs={3}>
         <FlexDiv>
           <CircleDiv circle={progress?.split("_")?.join(" ")}>
             <EmptyCircle></EmptyCircle>
           </CircleDiv>
         </FlexDiv>
       </Col>
-      <Col lg={2} md={2} sm={3} xs={3}>
+      <Col lg={2} md={2} sm={2} xs={3}>
         <FlexDiv>
           <LuEdit
             onClick={() => handleAction("E", item, index)}
@@ -89,6 +89,9 @@ const FlexDiv = styled.div`
   width: 100%;
   height: 100%;
 
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
   .bg-secondary {
     background: lightgray !important;
     color: gray !important;

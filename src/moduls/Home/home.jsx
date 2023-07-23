@@ -68,12 +68,18 @@ export default Home;
 
 const MainWrap = styled.div`
   padding: 40px;
-  margin: 0px auto;
+  margin: 30px auto;
+  border-radius: 10px;
   justify-content: space-between;
   background: #e8e5e5;
   max-width: calc(100% - 65px);
   min-height: 100vh;
   max-width: 1200px;
+  @media (max-width: 767px) {
+    padding: 25px;
+    margin: 0px;
+    border-radius: 0px;
+  }
 `;
 const TopDiv = styled.div`
   display: flex;

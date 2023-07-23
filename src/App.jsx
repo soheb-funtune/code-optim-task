@@ -6,12 +6,12 @@ import Challenge from "./moduls/challenge4/challenge.jsx";
 
 function App() {
   return (
-    <>
+    <div style={{ overflowY: "scroll" }}>
       {/* 1 */}
       <Home />
       {/* 4 */}
       <Challenge />
-    </>
+    </div>
   );
 }
 
