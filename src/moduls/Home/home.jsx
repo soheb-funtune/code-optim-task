@@ -14,12 +14,12 @@ const Home = () => {
   const [edit, setEdit] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
+  // api data Fetched and after modification added into `setData`
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("https://jsonplaceholder.typicode.com/todos")
         .then((res) => res.json())
         .catch((err) => console.log({ err }));
-      // let res2 = new Array(4);
       let res2 = res
         ?.map(({ title, completed }) => ({
           task: title,
@@ -34,8 +34,8 @@ const Home = () => {
     fetchData();
   }, []);
 
+  //this function handles both "Delete" and "Edit" actions
   const handleAction = (e, item, index) => {
-    // event.preventDefault();
     if (e === "D") {
       const del = data?.filter((ele) => ele?.task !== item?.task);
       console.log({ del });
@@ -51,7 +51,6 @@ const Home = () => {
     <MainWrap>
       <TopDiv>
         <Styledh2>Task List</Styledh2>
-
         <StyledBtn onClick={() => setAddShow(true)}>
           {" "}
           <AiOutlinePlus style={{ marginRight: "5px" }} />
@@ -63,6 +62,7 @@ const Home = () => {
           <ListItem item={item} index={index} handleAction={handleAction} />
         ))}
       </TodoList>
+      {/* AddData Modal */}
       {addShow && (
         <AddData
           show={addShow}
@@ -71,6 +71,7 @@ const Home = () => {
           setData={setData}
         />
       )}
+      {/* Edit Data Modal */}
       {showEdit && (
         <EditData
           show={showEdit}
@@ -95,7 +96,7 @@ const MainWrap = styled.div`
   max-width: calc(100% - 65px);
   min-height: 100vh;
   max-width: 1200px;
-  @media (max-width: 767px) {
+  @media (max-width: 1200px) {
     padding: 25px;
     margin: 0px;
     border-radius: 0px;

@@ -7,7 +7,7 @@ import Challenge from "./moduls/challenge4/challenge.jsx";
 function App() {
   return (
     <div style={{ overflowY: "scroll" }}>
-      {/* 1 */}
+      {/* All chanlenges are completed in this */}
       <Home />
       {/* 4 */}
       <Challenge />
