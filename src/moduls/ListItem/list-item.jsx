@@ -51,7 +51,7 @@ const StyledRow = styled(Row)`
   margin: 10px 0px;
   padding: 10px 15px;
   background: white;
-  transition: all 0.6 ease-in;
+  transition: all 0.3s ease-in;
   &:hover {
     transform: scale(1.01);
     box-shadow: -3px 0px 35px -14px rgba(5, 5, 5, 0.75);
@@ -99,7 +99,7 @@ const FlexDiv = styled.div`
   .icons {
     font-size: 20px;
     margin-left: 10px;
-    font-size: 25px;
+    font-size: 22px;
     @media (max-width: 767px) {
       font-size: 15px;
       margin-left: 5px;
@@ -107,7 +107,7 @@ const FlexDiv = styled.div`
   }
   .delete-icon {
     color: #f44141;
-    font-size: 30px;
+    font-size: 25px;
     @media (max-width: 767px) {
       font-size: 20px;
     }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Row, Col, Badge } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -14,8 +14,26 @@ const Home = () => {
   const [edit, setEdit] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("https://jsonplaceholder.typicode.com/todos")
+        .then((res) => res.json())
+        .catch((err) => console.log({ err }));
+
+      const res2 = res?.map(({ title, completed }) => ({
+        task: title,
+        priority: "Low",
+        progress: completed ? "Done" : "To_Do",
+      }));
+      setData([...data, ...res2]);
+      console.log("api", data);
+    };
+
+    fetchData();
+  }, []);
+
   const handleAction = (e, item, index) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (e === "D") {
       const del = data?.filter((ele) => ele?.task !== item?.task);
       console.log({ del });
