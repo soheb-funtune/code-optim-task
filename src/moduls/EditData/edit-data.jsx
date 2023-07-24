@@ -1,28 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import CustomModal from "../../components/Modal/modal";
 import { useForm } from "react-hook-form";
 import { Row, Col } from "react-bootstrap";
 import styled from "styled-components";
+import { MyContext } from "../../contextApi/my-context";
 
-const EditData = ({ show, setShow, data, setData, edit }) => {
+const EditData = ({ show, setShow, edit }) => {
+  const { state, dispatch } = useContext(MyContext);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm({
-    defaultValues: data[`${edit * 1}`] ? data[`${edit * 1}`] : {},
+    defaultValues: state[`${edit * 1}`] ? state[`${edit * 1}`] : {},
   });
 
   const onSubmit = (submitData) => {
-    const editAll = data?.map((item, index) =>
+    const editAll = state?.map((item, index) =>
       index * 1 === edit * 1 ? submitData : item
     );
-    setData([...editAll]);
+    dispatch({ type: "EDIT", payload: editAll });
     console.log("called", editAll, submitData);
     setShow(false);
   };
-  console.log("watch", watch(), data[`${edit * 1}`]);
+  console.log("watch", watch(), state[`${edit * 1}`]);
 
   const AddForm = () => {
     return (

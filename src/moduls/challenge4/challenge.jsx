@@ -1,50 +1,79 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CompoA from "./compo-a.jsx";
-import CompoB from "./compo-b.jsx";
-import CompoC from "./compo-c.jsx";
+
+// Higher-Order Component
+const withIncrement = (BaseComponent, incrementValue) => {
+  const WithIncrement = (props) => {
+    const [count, setCount] = useState(0);
+
+    const handleIncrement = () => {
+      setCount((prevCount) => prevCount + incrementValue);
+    };
+
+    return (
+      <BaseComponent count={count} onIncrement={handleIncrement} {...props} />
+    );
+  };
+
+  return WithIncrement;
+};
+
+const ComponentA = ({ count, onIncrement }) => {
+  return (
+    <div>
+      <h2>Component A</h2>
+      <p>Count: {count}</p>
+      <StyledButton onClick={onIncrement}>Increment by Two</StyledButton>
+    </div>
+  );
+};
+
+const ComponentB = ({ count, onIncrement }) => {
+  return (
+    <div>
+      <h2>Component B</h2>
+      <p>Count: {count}</p>
+      <StyledButton onClick={onIncrement}>Increment by Twenty</StyledButton>
+    </div>
+  );
+};
+
+const ComponentC = ({ count, onIncrement }) => {
+  return (
+    <div>
+      <h2>Component C</h2>
+      <p>Count: {count}</p>
+      <StyledButton onClick={onIncrement}>Increment by Hundred</StyledButton>
+    </div>
+  );
+};
+
+const ComponentAWithIncrement = withIncrement(ComponentA, 2);
+const ComponentBWithIncrement = withIncrement(ComponentB, 20);
+const ComponentCWithIncrement = withIncrement(ComponentC, 100);
 
 const Challenge = () => {
-  const [count, counter] = useState(0);
   return (
-    <MainWrap>
-      <Styledh2>Challenge 4</Styledh2>
-      <h2 style={{ color: "red", textAlign: "center" }}>{count}</h2>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          gap: "20px",
-        }}
-      >
-        <CompoA count={count} counter={counter} />
-        <CompoB count={count} counter={counter} />
-        <CompoC count={count} counter={counter} />
-      </div>
-    </MainWrap>
+    <Wrap>
+      <ComponentAWithIncrement />
+      <ComponentBWithIncrement />
+      <ComponentCWithIncrement />
+    </Wrap>
   );
 };
 
 export default Challenge;
 
-const MainWrap = styled.div`
-  padding: 40px;
-  margin: 30px auto;
-  border-radius: 10px;
-  justify-content: space-between;
-  background: #e8e5e5;
-  max-width: calc(100% - 65px);
-  min-height: max-content;
-  max-width: 1200px;
-  @media (max-width: 767px) {
-    padding: 25px;
-    margin: 0px;
-    border-radius: 0px;
-  }
+const Wrap = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 `;
-
-const Styledh2 = styled.div`
-  font-size: 30px;
-  font-weight: 800;
+const StyledButton = styled.StyledButton`
+  margin-top: 10px;
+  padding: 5px 15px;
+  background: purple;
+  color: white;
+  border: none;
+  margin: 5px;
 `;

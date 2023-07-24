@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import CustomModal from "../../components/Modal/modal";
 import { useForm } from "react-hook-form";
 import { Row, Col } from "react-bootstrap";
 import styled from "styled-components";
+import { MyContext } from "../../contextApi/my-context";
 
-const AddData = ({ show, setShow, data, setData }) => {
+const AddData = ({ show, setShow }) => {
+  const { state, dispatch } = useContext(MyContext);
   const {
     register,
     handleSubmit,
@@ -15,7 +17,7 @@ const AddData = ({ show, setShow, data, setData }) => {
   const onSubmit = (submitData) => {
     console.log("called", submitData);
     // const add = {}
-    setData([...data, submitData]);
+    dispatch({ type: "ADD", payload: submitData });
     setShow(false);
   };
   console.log({ errors });

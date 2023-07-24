@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Row, Col, Badge } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import { TodoData } from "../json-data.js";
 import AddData from "../AddData/add-data.jsx";
 import EditData from "../EditData/edit-data.jsx";
 import ListItem from "../ListItem/list-item.jsx";
+import { MyContext } from "../../contextApi/my-context.js";
 
 const Home = () => {
-  const [data, setData] = useState(TodoData || []);
+  const { state, dispatch } = useContext(MyContext);
+  // const [data, setData] = useState(TodoData || []);
   const [addShow, setAddShow] = useState(false);
   const [edit, setEdit] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -27,7 +28,7 @@ const Home = () => {
           progress: completed ? "Done" : "To_Do",
         }))
         ?.slice(0, 10);
-      setData([...data, ...res2]);
+      dispatch({ type: "API", payload: [...res2] });
       console.log("api", res2);
     };
 
@@ -37,9 +38,9 @@ const Home = () => {
   //this function handles both "Delete" and "Edit" actions
   const handleAction = (e, item, index) => {
     if (e === "D") {
-      const del = data?.filter((ele) => ele?.task !== item?.task);
-      console.log({ del });
-      setData(del);
+      const del = state?.filter((ele) => ele?.task !== item?.task);
+      console.log(del);
+      dispatch({ type: "DEL", payload: del });
     }
     if (e === "E") {
       setEdit(index);
@@ -58,28 +59,15 @@ const Home = () => {
         </StyledBtn>
       </TopDiv>
       <TodoList>
-        {data?.map((item, index) => (
+        {state?.map((item, index) => (
           <ListItem item={item} index={index} handleAction={handleAction} />
         ))}
       </TodoList>
       {/* AddData Modal */}
-      {addShow && (
-        <AddData
-          show={addShow}
-          setShow={setAddShow}
-          data={data}
-          setData={setData}
-        />
-      )}
+      {addShow && <AddData show={addShow} setShow={setAddShow} />}
       {/* Edit Data Modal */}
       {showEdit && (
-        <EditData
-          show={showEdit}
-          edit={edit}
-          setShow={setShowEdit}
-          data={data}
-          setData={setData}
-        />
+        <EditData show={showEdit} edit={edit} setShow={setShowEdit} />
       )}
     </MainWrap>
   );
