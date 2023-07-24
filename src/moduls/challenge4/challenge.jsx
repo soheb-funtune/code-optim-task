@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Row, Col } from "react-bootstrap";
 
 // Higher-Order Component
 const withIncrement = (BaseComponent, incrementValue) => {
@@ -56,7 +57,9 @@ const Challenge = () => {
   return (
     <Wrap>
       <ComponentAWithIncrement />
+
       <ComponentBWithIncrement />
+
       <ComponentCWithIncrement />
     </Wrap>
   );
@@ -65,9 +68,11 @@ const Challenge = () => {
 export default Challenge;
 
 const Wrap = styled.div`
+  padding: 20px;
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+  flex-direction: column;
 `;
 
 const StyledButton = styled.button`
@@ -77,4 +82,5 @@ const StyledButton = styled.button`
   color: white;
   border: none;
   margin: 5px;
+  margin: 10px auto;
 `;
