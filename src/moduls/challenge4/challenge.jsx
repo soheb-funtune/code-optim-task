@@ -69,7 +69,8 @@ const Wrap = styled.div`
   justify-content: space-around;
   margin-top: 20px;
 `;
-const StyledButton = styled.StyledButton`
+
+const StyledButton = styled.button`
   margin-top: 10px;
   padding: 5px 15px;
   background: purple;
