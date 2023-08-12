@@ -3,10 +3,16 @@ import styled from "styled-components";
 import { Row, Col, Badge } from "react-bootstrap";
 import { LuEdit } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { motion } from "framer-motion";
 
 const ListItem = ({ item, index, handleAction }) => {
   const { task, priority, progress } = item;
   return (
+    // <motion.div
+    //   initial={{ opacity: 0, scale: 0.5, marginLeft: "-100%" }}
+    //   animate={{ opacity: 1, scale: 1, marginLeft: "0" }}
+    //   transition={{ duration: 0.3 }}
+    // >
     <StyledRow>
       <Col lg={4} md={4} sm={4} xs={12}>
         <StyledHead>Task</StyledHead>
@@ -41,6 +47,7 @@ const ListItem = ({ item, index, handleAction }) => {
         </FlexDiv>
       </Col>
     </StyledRow>
+    // </motion.div>
   );
 };
 

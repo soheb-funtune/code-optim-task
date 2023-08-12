@@ -12,7 +12,7 @@ function App() {
         {/* All chanlenges are completed in this */}
         <Home />
         {/* 4 */}
-        <Challenge />
+        {/* <Challenge /> */}
       </div>
     </MyContext.Provider>
   );

@@ -18,11 +18,11 @@ export const initialState = [
 export const reducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-      return [...state, action.payload];
+      return [action.payload, ...state];
     case "EDIT":
       return [...action.payload];
     case "API":
-      return [...state, ...action.payload];
+      return [...action.payload, ...state];
     case "DEL":
       return [...action.payload];
     // Other cases for different actions...
